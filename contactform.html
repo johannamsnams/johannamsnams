@@ -79,7 +79,7 @@
     </nav>
 <h1>Ota yhteyttä</h1>
 <!---Yhteydenottolomake-->
-<div class="container my-5 text-#373846">
+<div class="container my-5" style="color: #373846">
     <form class="needs-validation" novalidate>
         <div class="mb-3">
           <label for="email" class="form-label">Sähköpostiosoitteesi</label>
@@ -94,12 +94,12 @@
         </div>
         <div class="mb-3">
             <label for="firstname" class="form-label">Etunimi</label>
-
             <input type="text" class="form-control" id="firstname" placeholder="Etunimi" required>
             <div class="invalid-feedback">
                 Pakollinen.
             </div>
             <div class="valid-feedback">
+            jee
             </div>
         </div>
         <div class="mb-3">
@@ -109,16 +109,17 @@
                 Pakollinen.
             </div>
             <div class="valid-feedback">
+                jee
             </div>
         </div>
         <div class="mb-3">
             <label for="emailsubject" id="form-label">Otsikko</label>
-
             <input type="text" class="form-control"id="emailsubject" placeholder="Otsikko" required>
             <div class="invalid-feedback">
                 Pakollinen.
             </div>
             <div class="valid-feedback">
+                jee
             </div>
         </div>
         <div class="mb-3">
@@ -128,6 +129,7 @@
                  Pakollinen.
             </div>
             <div class="valid-feedback">
+                jee
             </div>
         </div>
 <!---Tiedostojen uppaus-->
@@ -137,13 +139,13 @@
             <input type="file" class="form-control-file" id="files">
           </div>
         </br>
-        <a class="btn btn-dark">Lähetä</a> <!---Linkki vie takaisin kotisivulle, tietojen ei pitäisi tallentua.-->
+        <button type="submit" class="btn btn-dark">Lähetä <!---Linkki uudelleenohjaa sivulle, tietojen ei pitäisi tallentua.-->
       </form>
     </div>
 <!---Bootstrapin sivuilta koodi, joka validoi yhteydenottolomakkeen tietoja. Ei jatka, ellei käyttäjä ole syöttänyt vaadittuja arvoja.--->
     <script>
     (function () {
-        'use strict'
+        'use strict';
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
