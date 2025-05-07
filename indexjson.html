@@ -74,7 +74,7 @@
     <main>
         <div class = "img_luokka" id="vastaus"></div>
         <script>
-            fetch('tietue.json')
+            fetch('/json/tietue.json')
                 .then(function (response) {
                     return response.json();
                 })
@@ -84,7 +84,7 @@
                 })
 
                 .catch(function (error) { 
-                    document.getElementById("vastaus").innerHTML = "<p>lol ei löytynyt</p>"
+                    document.getElementById("vastaus").innerHTML = "<p>lol ei löytyny</p>"
                 })
 
             function kerro(obj) {
