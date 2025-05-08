@@ -84,10 +84,10 @@
             function kerro(obj) {
                 let tiedot = "<h1>" + obj.opintojakso + "</h1><br>" + "<p>" 
                 + obj.oppilasmaara + "<p><br>"
-                + obj.oppilaat.join(" ") + "</p>";
-                + obj.alku + " - " + obj.loppu + "</p>";
-                + "<p>" + obj.kestovko + "</p>";
-                + "<p><img src='" + obj.kuva + "' alt='meanwhile'></p>";
+                + obj.oppilaat.join(" ") + "</p>"
+                + obj.alku + " - " + obj.loppu + "</p>"
+                + "<p>" + obj.kestovko + "</p>"
+                tiedot+= "<p><img src='" + obj.kuva + "' alt='meanwhile'></p>";
 
                 document.getElementById("vastaus").innerHTML = tiedot;
                 
