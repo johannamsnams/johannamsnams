@@ -82,19 +82,15 @@
                 })
 
             function kerro(obj) {
-                let string = ""
-                for (let i=0; i < obj.oppilaat.length; i++){
-                    lista += "<p>" + obj.oppilaat[i] + " <span></p>"
+                let tiedot = "<h1>" + obj.opintojakso + "</h1><br>" + "<p>" + obj.oppilasmaara + "<p>";
+                
+                for (var i=0; i < obj.oppilaat.length; i++){
+                    tiedot += "<p>" + obj.oppilaat[i] + " ";
                 }
-
-                let tiedot = "<h1>" + obj.opintojakso + "</h1><br>"
-                    + obj.oppilasmaara + "<br>"
-                    + console.log(string) 
-                    + obj.aikavali + "<br>"
-                    + obj.kestovko + "<br>";
-
-
-                + "<p><img src='" + obj.kuva + "' alt= 'meanwhile'></p>"
+                tiedot += "</p>";
+                tiedot += "<p>" + obj.alku + " - " + obj.loppu + "</p>";
+                tiedot += "<p>" + obj.kestovko + "</p>";
+                tiedot += "<p><img src='" + obj.kuva + "' alt='meanwhile'></p>";
 
                 document.getElementById("vastaus").innerHTML = tiedot;
                 
