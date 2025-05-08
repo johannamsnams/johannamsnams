@@ -88,10 +88,14 @@
                     + obj.kestovko + "<br>";
 
                 tiedot += "<p>Oppilaat: </p>";
-
-                for (var i=0; i < obj.oppilaat.length; i++){
-                    tiedot += "<p>" + obj.oppilaat[i] + " </p>"
+                // ChatGPT prompti: "Kuinka saan listan vaakatasoon?"
+                tiedot += "<h3>Oppilaat:</h3>";
+                tiedot += "<div class='oppilaat-lista'>"; // Tämä div ympäröi oppilaat ja tekee siitä joustavan
+                for (var i = 0; i < obj.oppilaat.length; i++) {
+                    tiedot += "<div class='oppilas'>" + obj.oppilaat[i] + "</div>"; // Jokainen oppilas on oma div
                 }
+                tiedot += "</div>";
+                
                 + "<p><img src='" + obj.kuva + "' alt= 'meanwhile'></p>"
 
                 document.getElementById("vastaus").innerHTML = tiedot;
