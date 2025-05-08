@@ -27,10 +27,10 @@
     background-color: #ffca4e;
 }
     .navbar-custom .navbar-text{
-    color: #755051;
+    color: #2b0da2;
 }
     .navbar-custom .navbar-nav .nav-link {
-        color: #755051;
+        color: #280e9f;
     }
     .navbar-custom .nav-item.active .nav-link,
     .navbar-custom .nav-item.hover .nav-link{
@@ -50,28 +50,22 @@
                     <!-- Linkit -->                 
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a class="nav-link" href="index.html">Etusivu</a>
+                        <a class="nav-link" href="indexjson.html">JSON-Etusivu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="aboutme.html">Tietoa</a>
+                        <a class="nav-link" href="pokehaku.html">PokéHaku OSA I</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="portfolio.html">Portfolio</a>
+                        <a class="nav-link" href="saa.html">Sää</a>
                     </li>
-                 
-                <!-- Alasvetovalikko-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Lisää</a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="pp.html">Tietosuojaseloste</a></li>
-                          <li><a class="dropdown-item" href="contactform.html">Ota yhteyttä</a></li>
-                        </ul>
-                      </li> 
-                    </ul>                
+                    <li class="nav-item">
+                        <a class="nav-link" href="eevee.html">Eevee</a>
+                    </li>
                 </div>
             </div>    
         </nav> 
     <main>
+        <!---JSON--->
         <div class = "img_luokka" id="vastaus"></div>
         <script>
             fetch('/johannamsnams/json/tietue.json')
@@ -89,7 +83,7 @@
 
             function kerro(obj) {
                 let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>"
-                    + "<p><img-src='" + obj.kuva + "'></p>"
+                    + "<p><img-src=" + obj.kuva + "></p>"
                     + "<h3> Opintojakso</h3>" 
                     + "Nimi: " + obj.opintojakso.nimi + "<br>"
                     + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
