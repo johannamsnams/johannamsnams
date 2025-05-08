@@ -82,20 +82,18 @@
                 })
 
             function kerro(obj) {
+                let string = ""
+                for (let i=0; i < obj.oppilaat.length; i++){
+                    lista += "<p>" + obj.oppilaat[i] + " <span></p>"
+                }
+
                 let tiedot = "<h1>" + obj.opintojakso + "</h1><br>"
                     + obj.oppilasmaara + "<br>"
+                    + console.log(string) 
                     + obj.aikavali + "<br>"
                     + obj.kestovko + "<br>";
 
-                tiedot += "<p>Oppilaat: </p>";
-                // ChatGPT prompti: "Kuinka saan listan vaakatasoon?"
-                tiedot += "<h3>Oppilaat:</h3>";
-                tiedot += "<div class='oppilaat-lista'>"; // Tämä div ympäröi oppilaat ja tekee siitä joustavan
-                for (var i = 0; i < obj.oppilaat.length; i++) {
-                    tiedot += "<div class='oppilas'>" + obj.oppilaat[i] + "</div>"; // Jokainen oppilas on oma div
-                }
-                tiedot += "</div>";
-                
+
                 + "<p><img src='" + obj.kuva + "' alt= 'meanwhile'></p>"
 
                 document.getElementById("vastaus").innerHTML = tiedot;
