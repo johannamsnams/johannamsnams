@@ -65,8 +65,9 @@
             </div>    
         </nav> 
     <main>
+        <div id="vastaus"></div>
         <script>
-            <div id="vastaus"></div>
+            
             fetch('/johannamsnams/json/kurssi.json')
                 .then(function (response) {
                     return response.json();
@@ -86,12 +87,14 @@
                     + obj.aikavali + "<br>"
                     + obj.kestovko + "<br>";
 
-                tiedot += "<p></p>";
+                tiedot += "<p>Oppilaat: </p>";
 
                 for (var i=0; i < obj.oppilaat.length; i++){
-                    tiedot += "<b>Oppilaat: " + obj.oppilaat[i] + "</b>"
+                    tiedot += "<p>" + obj.oppilaat[i] + " </p>"
                 }
+                + "<p><img src='" + obj.kuva + "' alt= 'meanwhile'></p>"
+
                 document.getElementById("vastaus").innerHTML = tiedot;
-                + "<p><img src='" + obj.kuva + "' alt= 'luokkahuone'></p>"
+                
             }
         </script>
