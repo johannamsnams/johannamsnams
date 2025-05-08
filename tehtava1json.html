@@ -65,10 +65,9 @@
             </div>    
         </nav> 
     <main>
-        <!---JSON--->
-        <div class = "img_luokka" id="vastaus"></div>
         <script>
-            fetch('/johannamsnams/json/tietue.json')
+            <div id="vastaus"></div>
+            fetch('/johannamsnams/json/kurssi.json')
                 .then(function (response) {
                     return response.json();
                 })
@@ -76,28 +75,23 @@
                 .then(function (responseJson) {
                     kerro(responseJson);
                 })
-
+               //Virheviesti
                 .catch(function (error) { 
                     document.getElementById("vastaus").innerHTML = "<p>lol ei löytyny</p>"
                 })
 
             function kerro(obj) {
-                let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>"
-                    + "<p><img-src=" + obj.kuva + "></p>"
-                    + "<h3> Opintojakso</h3>" 
-                    + "Nimi: " + obj.opintojakso.nimi + "<br>"
-                    + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
-                    + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
+                let tiedot = "<h1>" + obj.opintojakso + "</h1><br>"
+                    + obj.oppilasmaara + "<br>"
+                    + obj.aikavali + "<br>"
+                    + obj.kestovko + "<br>";
 
-                tiedot += "<p><h3> Aiheet </h3>";
+                tiedot += "<p></p>";
 
-                for (var i=0; i < obj.tekniikat.length; i++){
-                    tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>"
-                    tiedot += " <a href=" + obj.tekniikat[i].linkki + ">" 
-                        + obj.tekniikat[i].linkki + "</a>" + "<br>"
+                for (var i=0; i < obj.oppilaat.length; i++){
+                    tiedot += "<b>Oppilaat: " + obj.oppilaat[i] + "</b>"
                 }
                 document.getElementById("vastaus").innerHTML = tiedot;
+                + "<p><img src='" + obj.kuva + "' alt= 'luokkahuone'></p>"
             }
         </script>
-  </main>
-</body>
