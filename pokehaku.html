@@ -10,10 +10,6 @@
     <title>Johannan JSON-sivut</title>
 </head>
 <style>
-    div{
-        margin-left: 50px;
-        margin-right: 50px
-    }
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -60,6 +56,7 @@
         </div>
     </nav>
     <main>
+    <div class="container mt-5 my-2.5 bg-transparent">
         <h1>Pokémon-haku</h1>
         <p>
             <input type="text" id="PokemonName" placeholder="Enter Pokemon name">
@@ -68,7 +65,9 @@
         <p id="kuva2"></p>
         </p>
         <script>
-            fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
+            function poke() {
+                const pokeName = document.getElementById("PokemonName").value.toLowerCase();
+                fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
                 .then(function (response) {
                     return response.json();
                 })
@@ -78,8 +77,6 @@
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
-            function poke() {
-                const pokeName = document.getElementById("PokemonName").value.toLowerCase();
                 let name = document.getElementById("PokemonName").value;
             }
             function pokekuva(obj) {
@@ -89,7 +86,9 @@
                 document.getElementById("nimi").innerHTML = "<b>" + pokeName + "</b>"
                 document.getElementById("PokemonName").value = "";
             }
-            //Uusi funktio, kun käyttäjä painaa "käännä"
+
+            //Uusi funktio, kun käyttäjä painaa "käännä; tuo myös kolme uutta tietuetta"
+
             function kaannos() { 
                 const pokeName = document.getElementById("PokemonName").value.toLowerCase();
                 fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
@@ -121,5 +120,6 @@
         <p id="pituus"></p>
         <p id="paino"></p>
         </div>
+    </div>
     </main>
 </body>

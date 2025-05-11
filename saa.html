@@ -10,10 +10,7 @@
     <title>Johannan JSON-sivut</title>
 </head>
 <style>
-    div{
-        margin-left: 50px;
-        margin-right: 50px
-    }
+
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -60,9 +57,22 @@
         </div>
     </nav>
 <main>
+    <div class="container mt-5 my-2.5 bg-transparent">
     <script>
         <div id="vastaus"></div>
         fetch('https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (responseJson) {
+                    saa(responseJson);
+                })
+                .catch(function (error) {
+                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
+                })
+            function saa(){
 
+            }
     </script>
+    </div>
 </main>
