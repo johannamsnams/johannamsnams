@@ -64,7 +64,7 @@
         <p id="kuva2"></p>
         </p>
         <script>
-            fetch('https://pokeapi.co/api/V2/pokemon/${pokeName}')
+            fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
                 .then(function (response) {
                     return response.json();
                 })
@@ -82,13 +82,13 @@
                 let pokeurl = obj.sprites.front_default;
 
                 document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
-                document.getElementById("nimi").innerHTML = "<b>" + name + "</b>"
+                document.getElementById("nimi").innerHTML = "<b>" + pokeName + "</b>"
                 document.getElementById("pokemonName").value = "";
             }
             //Uusi funktio, kun käyttäjä painaa "käännä"
             function kaannos() { 
                 const pokeName = document.getElementById("PokemonName").value.toLowerCase();
-                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+                fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
                 .then(function (response) {
                     return response.json();
                 })
@@ -98,6 +98,7 @@
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
+            }
                 function pokeselin(obj){
                     let pokeurl2 = obj.sprites.back_default;
                     let cry = obj.cries.latest;
@@ -109,7 +110,6 @@
                 document.getElementById("pituus").innerHTML = height;
                 document.getElementById("paino").innerHTML = weight;
                 };
-        }
         </script>
         <button onclick="kaannos()">Käännä</button><br>
         <p id="selinkuva"></p>
