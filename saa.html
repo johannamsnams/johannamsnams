@@ -58,8 +58,15 @@
     </nav>
 <main>
     <div class="container mt-5 my-2.5 bg-transparent">
+    <h1><b>Sää Helsingissä</b></h1>
+    <div id="vastaus"></div>
     <script>
-        <div id="vastaus"></div>
+        const aika = new Date();
+        const time =  aika.toLocaleTimeString('fi-FI', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+        document.getElementById("vastaus").innerHTML = "<p>Sää kello " + time + "</p>";
         fetch('https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric')
                 .then(function (response) {
                     return response.json();
@@ -78,18 +85,15 @@
                 tuuli = data.wind.speed;
                 var iconCode = data.weather[0].icon;
                 var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
-
-                document.getElementById("weatherIcon").src = iconUrl;
-                document.getElementById("nimi").innerHTML = nimi;
-                document.getElementById("saatila").innerHTML = saatila;
-                document.getElementById("lampotila").innerHTML = lampotila + " °C";
-                document.getElementById("tuuli").innerHTML = tuuli + " m/s";   ;
+                let tieto = `<b><h3>Sää:</h3><br><p>": ${saatila}</p><br>`;
+                tieto +=  `<h3>Lämpötila:</h3><br><p>": ${lampotila}</p><br>`;
+                tieto += `<h3>Tuuli:</h3><br><p>": ${tuuli}</p><br></b>`;
+                tieto += `<img src="${iconUrl}" alt="Weather Icon">`;
+                tieto += "</p>"
+                document.getElementById("nimi").innerHTML = tieto;
             }
     </script>
-        <img id="weatherIcon" alt="Weather Icon">
-        <div id="nimi">Paikkakunta</div>
-        <div id="saatila">Sään tila</div>
-        <div id="lampotila">Lampotila</div>
-        <div id="tuuli">Tuulen nopeus</div>
+</div>
+</div>
 </main>
 </body>

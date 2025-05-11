@@ -103,10 +103,13 @@
                 }
                 //Tiedot: pituus, paino ja erikoistaito
                 function pokeselin(obj) {
-                    let pokeurl2 = obj.sprites.back_default;
-                    let height = obj.height;
-                    let weight = obj.weight;
-                    let ability = obj.ability.name;
+                    let pokeurl2 = obj.sprites.back_default; //Selinkuva
+                    let height = obj.height; // Pituus
+                    let weight = obj.weight; // Paino
+                    // Erikoistaidot, ja jos pokemonilla useita, ohjelma valitsee ensimmäisen.
+                    // Jos erikoistaitoja ei ole lainkaan, palautetaan "Ei erikoistaitoja"
+                    //GitHub Copilotista, kun prompti on ollut: "Kuinka iteroidaan erikoistaidot tietueesta?"
+                    let ability = obj.abilities.length > 0 ? obj.abilities[0].ability.name : "Ei erikoistaitoa";
                     let kaanna = `<p><img src='${pokeurl2}' alt='pokekaantynyt'><br>`;
                     kaanna += `Pituus: ${height}<br>`;
                     kaanna += `Paino: ${weight}<br>`;
