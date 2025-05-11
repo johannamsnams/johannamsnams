@@ -10,10 +10,10 @@
     <title>Johannan JSON-sivut</title>
 </head>
 <style>
-    body {
-        text-align: center;
+    div{
+        margin-left: 50px;
+        margin-right: 50px
     }
-
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -61,7 +61,7 @@
     </nav>
     <main>
         <!---JSON--->
-
+    <div class="container-fluid">
         <div id="vastaus"></div>
         <script>
             fetch('/johannamsnams/json/tietue.json')
@@ -79,11 +79,12 @@
             function kerro(obj) {
                 let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
                 tiedot += "<p><img src='" + obj.kuva + "' alt='luokkahuone' width='100%'></p>"
+                tiedot += "<div class='centered'>";
                 tiedot += "<h3> Opintojakso</h3>";
                 tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>"
                     + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
                     + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
-
+                tiedot +="</div>";
                 tiedot += "<p><h3> Aiheet </h3>";
 
                 for (var i = 0; i < obj.tekniikat.length; i++) {
@@ -95,5 +96,6 @@
                 document.getElementById("vastaus").innerHTML = tiedot;
             }
         </script>
+        </div>
     </main>
 </body>
