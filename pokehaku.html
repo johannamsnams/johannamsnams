@@ -56,73 +56,74 @@
         </div>
     </nav>
     <main>
-    <div class="container mt-5 my-2.5 bg-transparent">
-        <h1>Pokémon-haku</h1>
-        <p>
-            <input type="text" id="PokemonName" placeholder="Enter Pokemon name">
-            <button onclick="poke()">Hae</button><br>
-        <div id="nimi">Kirjoita laatikkoon Pokemonin nimi</div>
-        <p id="kuva2"></p>
-        </p>
-        <script>
-            function poke() {
-                const pokeName = document.getElementById("PokemonName").value.toLowerCase();
-                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (responseJson) {
-                    pokekuva(responseJson);
-                })
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
-                })
-                let name = document.getElementById("PokemonName").value;
-            }
-            function pokekuva(obj) {
-                let pokeurl = obj.sprites.front_default;
+        <div class="container mt-5 my-2.5 bg-transparent">
+            <h1>Pokémon-haku</h1>
+            <p>
+                <input type="text" id="PokemonName" placeholder="Enter Pokemon name">
+                <button onclick="poke()">Hae</button><br>
+            <div id="nimi">Kirjoita laatikkoon Pokemonin nimi</div>
+            <p id="kuva2"></p>
+            </p>
+            <script>
+                function poke() {
+                    const pokeName = document.getElementById("PokemonName").value.toLowerCase();
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (responseJson) {
+                            pokekuva(responseJson);
+                        })
+                        .catch(function (error) {
+                            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
+                        })
+                    let name = document.getElementById("PokemonName").value;
+                }
+                function pokekuva(obj) {
+                    let pokeurl = obj.sprites.front_default;
 
-                document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
-                document.getElementById("nimi").innerHTML = "<b>" + pokeName + "</b>"
-                document.getElementById("PokemonName").value = "";
-            }
+                    document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
+                    document.getElementById("nimi").innerHTML = "<b>" + pokeName + "</b>"
+                    document.getElementById("PokemonName").value = "";
+                }
 
-            //Uusi funktio, kun käyttäjä painaa "käännä; tuo myös kolme uutta tietuetta"
-            //Käytetään samaa funktiota kuin edellä, mutta lisätään kolme uutta tietuetta
-            function kaannos() { 
-                const pokeName = document.getElementById("PokemonName").value.toLowerCase();
-                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (responseJson) {
-                    pokeselin(responseJson);
-                })
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
-                })
-            }
-            //Tiedot: kuva, pituus, paino ja ääni
-                function pokeselin(obj){
+                //Uusi funktio, kun käyttäjä painaa "käännä"; tuo myös kolme uutta tietuetta
+                function kaannos() {
+                    const pokeName = document.getElementById("PokemonName").value.toLowerCase();
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (responseJson) {
+                            pokeselin(responseJson);
+                        })
+                        .catch(function (error) {
+                            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
+                        })
+                }
+                //Tiedot: kuva, pituus, paino ja ääni
+                function pokeselin(obj) {
                     let pokeurl2 = obj.sprites.back_default;
                     let height = obj.height;
                     let weight = obj.weight;
-                    let cry = obj.cries.latest;
+                    //GitHub Copilot: Kuinka saan toimivan soittimen .ogg-tiedostoille?
+                    //Ehdotti kovakoodattua URL-osoitetta, mutta se ei toimi
+                    //Käytetään PokeAPI:n ääntä
+                    let cry = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/${obj.id}.ogg`;
                     let kaanna = `<p><img src='${pokeurl2}' alt='pokekaantynyt'><br>`;
                     kaanna += `Pituus: ${height}<br>"`;
-                    kaanna+= `Paino: ${weight}<br>"`;
+                    kaanna += `Paino: ${weight}<br>"`;
                     //Soitin, jotta käyttäjä voi kuunnella Pokémonin karjauksen; sisältää virheviestin
-                    kaanna+= `"Äännähtely:
+                    kaanna += `"Äännähtely:
                         <audio controls>
                         <source src="${cry}" type="audio/ogg">      
                         Your browser does not support the audio element.
                         </audio></p>`;
-
-                document.getElementById("selinkuva").innerHTML = kaanna;
+                    document.getElementById("selinkuva").innerHTML = kaanna;
                 };
-        </script>
-        <button onclick="kaannos()">Käännä</button><br>
+            </script>
+            <button onclick="kaannos()">Käännä</button><br>
+            <div id="selinkuva"></div>
         </div>
-    </div>
     </main>
 </body>

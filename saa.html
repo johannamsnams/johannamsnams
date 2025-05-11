@@ -70,14 +70,22 @@
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
-            function saa(){
-                const nimi = document.getElementById("nimi");
-                const kuva2 = document.getElementById("kuva2");
-                const kuva = document.createElement("img");
-                kuva.src = "https://openweathermap.org/img/wn/" + responseJson.weather[0].icon + "@2x.png";
-                kuva2.appendChild(kuva);
-                nimi.innerHTML = "<p>" + responseJson.name + "</p>";
-                document.getElementById("vastaus").innerHTML = "<p>Ilma on " + responseJson.weather[0].description + "</p>";
+            function saa(data){
+                var teksti = "";
+                nimi = data.name;
+                saatila = data.weather[0].description;
+                lampotila = data.main.temp;
+                tuuli = data.wind.speed;
+                var iconCode = data.weather[0].icon;
+                var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+
+                document.getElementById("weatherIcon").src = iconUrl;
+                documentgetElementById("nimi").innerHTML = nimi;
+                document.getElementById("saatila").innerHTML = saatila;
+                document.getElementById("lampotila").innerHTML = lampotila + " °C";
+                document.getElementById("tuuli").innerHTML = tuuli + " m/s";   
+                document.getElementById("vastaus").innerHTML = teksti;
+        
             }
     </script>
     </div>
