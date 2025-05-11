@@ -13,6 +13,7 @@
     .centered {
         text-align: center;
     }
+
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -60,41 +61,41 @@
     </nav>
     <main>
         <!---JSON--->
-    <div class="container mt-5 my-2.5 bg-transparent">
-        <div id="vastaus"></div>
-        <script>
-            fetch('/johannamsnams/json/tietue.json')
-                .then(function (response) {
-                    return response.json();
-                })
+        <div class="container mt-5 my-2.5 bg-transparent">
+            <div id="vastaus"></div>
+            <script>
+                fetch('/johannamsnams/json/tietue.json')
+                    .then(function (response) {
+                        return response.json();
+                    })
 
-                .then(function (responseJson) {
-                    kerro(responseJson);
-                })
+                    .then(function (responseJson) {
+                        kerro(responseJson);
+                    })
 
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
-                })
-            function kerro(obj) {
-                let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
-                tiedot += "<p><img src='" + obj.kuva + "' alt='luokkahuone' width='100%'></p>"
-                tiedot += "<div class='centered'>";
-                tiedot += "<h3>Opintojakso</h3>";
-                tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>"
-                    + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
-                    + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
-                tiedot +="</div>";
-                tiedot += "<p><h3> Aiheet </h3>";
+                    .catch(function (error) {
+                        document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
+                    })
+                function kerro(obj) {
+                    let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
+                    tiedot += "<p><img src='" + obj.kuva + "' alt='luokkahuone' width='100%'></p>"
+                    tiedot += "<div class='centered'>";
+                    tiedot += "<h3>Opintojakso</h3>";
+                    tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>"
+                        + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
+                        + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
+                    tiedot += "</div>";
+                    tiedot += "<p><h3> Aiheet </h3>";
 
-                for (var i = 0; i < obj.tekniikat.length; i++) {
-                    tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>"
-                    tiedot += " <a href=" + obj.tekniikat[i].linkki + ">"
-                        + obj.tekniikat[i].linkki + "</a>" + "<br>"
+                    for (var i = 0; i < obj.tekniikat.length; i++) {
+                        tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>"
+                        tiedot += " <a href=" + obj.tekniikat[i].linkki + ">"
+                            + obj.tekniikat[i].linkki + "</a>" + "<br>"
+                    }
+                    tiedot += "</p>";
+                    document.getElementById("vastaus").innerHTML = tiedot;
                 }
-                tiedot += "</p>";
-                document.getElementById("vastaus").innerHTML = tiedot;
-            }
-        </script>
+            </script>
         </div>
     </main>
 </body>

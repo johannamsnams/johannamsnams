@@ -56,37 +56,37 @@
         </div>
     </nav>
     <main>
-    <div class="container mt-5 my-2.5 bg-transparent">
-    <!---JSON--->
-        <div id="vastaus"></div>
-        <script>
-            fetch('/johannamsnams/json/kurssi.json')
-                .then(function (response) {
-                    return response.json();
-                })
+        <div class="container mt-5 my-2.5 bg-transparent">
+            <!---JSON--->
+            <div id="vastaus"></div>
+            <script>
+                fetch('/johannamsnams/json/kurssi.json')
+                    .then(function (response) {
+                        return response.json();
+                    })
 
-                .then(function (responseJson) {
-                    kerro(responseJson);
-                })
+                    .then(function (responseJson) {
+                        kerro(responseJson);
+                    })
 
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
-                })
+                    .catch(function (error) {
+                        document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
+                    })
 
-            function kerro(obj) {
-                let tiedot = "<h1>" + obj.opintojakso + "</h1>" + "<p>"
-                    + obj.oppilasmaara + "<p>"
-                    // Oppilaat vaakatasoon .join()-metodilla.
-                    + obj.oppilaat.join(" ") + "</p>"
-                    + obj.alku + " - " + obj.loppu + "</p>"
-                    + "<p>" + obj.kestovko + "</p>"
-                //Kuva lisätään "tiedot +=" -koodilla
-                tiedot += "<p><img src='" + obj.kuva + "' width=50% alt='meanwhile'></p>"; 
-                //Tulostetaan syöte
-                document.getElementById("vastaus").innerHTML = tiedot;
+                function kerro(obj) {
+                    let tiedot = "<h1>" + obj.opintojakso + "</h1>" + "<p>"
+                        + obj.oppilasmaara + "<p>"
+                        // Oppilaat vaakatasoon .join()-metodilla.
+                        + obj.oppilaat.join(" ") + "</p>"
+                        + obj.alku + " - " + obj.loppu + "</p>"
+                        + "<p>" + obj.kestovko + "</p>"
+                    //Kuva lisätään "tiedot +=" -koodilla
+                    tiedot += "<p><img src='" + obj.kuva + "' width=50% alt='meanwhile'></p>";
+                    //Tulostetaan syöte
+                    document.getElementById("vastaus").innerHTML = tiedot;
 
-            }
-        </script>
+                }
+            </script>
         </div>
     </main>
 </body>
