@@ -71,7 +71,13 @@
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
             function saa(){
-
+                const nimi = document.getElementById("nimi");
+                const kuva2 = document.getElementById("kuva2");
+                const kuva = document.createElement("img");
+                kuva.src = "https://openweathermap.org/img/wn/" + responseJson.weather[0].icon + "@2x.png";
+                kuva2.appendChild(kuva);
+                nimi.innerHTML = "<p>" + responseJson.name + "</p>";
+                document.getElementById("vastaus").innerHTML = "<p>Ilma on " + responseJson.weather[0].description + "</p>";
             }
     </script>
     </div>

@@ -88,7 +88,7 @@
             }
 
             //Uusi funktio, kun käyttäjä painaa "käännä; tuo myös kolme uutta tietuetta"
-
+            //Käytetään samaa funktiota kuin edellä, mutta lisätään kolme uutta tietuetta
             function kaannos() { 
                 const pokeName = document.getElementById("PokemonName").value.toLowerCase();
                 fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
@@ -102,23 +102,26 @@
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
             }
+            //Tiedot: kuva, pituus, paino ja ääni
                 function pokeselin(obj){
                     let pokeurl2 = obj.sprites.back_default;
-                    let cry = obj.cries.latest;
                     let height = obj.height;
                     let weight = obj.weight;
-                
-                document.getElementById("selinkuva").innerHTML = "<img src=" + pokeurl2 + ">";
-                document.getElementById("aani").innerHTML = cry;
-                document.getElementById("pituus").innerHTML = height;
-                document.getElementById("paino").innerHTML = weight;
+                    let cry = obj.cries.latest;
+                    let kaanna = `<p><img src='${pokeurl2}' alt='pokekaantynyt'><br>`;
+                    kaanna += `Pituus: ${height}<br>"`;
+                    kaanna+= `Paino: ${weight}<br>"`;
+                    //Soitin, jotta käyttäjä voi kuunnella Pokémonin karjauksen; sisältää virheviestin
+                    kaanna+= `"Äännähtely:
+                        <audio controls>
+                        <source src="${cry}" type="audio/ogg">      
+                        Your browser does not support the audio element.
+                        </audio></p>`;
+
+                document.getElementById("selinkuva").innerHTML = kaanna;
                 };
         </script>
         <button onclick="kaannos()">Käännä</button><br>
-        <p id="selinkuva"></p>
-        <p id="aani"></p>
-        <p id="pituus"></p>
-        <p id="paino"></p>
         </div>
     </div>
     </main>
