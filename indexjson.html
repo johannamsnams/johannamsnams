@@ -10,6 +10,9 @@
     <title>Johannan JSON-sivut</title>
 </head>
 <style>
+    .centered {
+        text-align: center;
+    }
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -76,7 +79,7 @@
                 let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
                 tiedot += "<p><img src='" + obj.kuva + "' alt='luokkahuone' width='100%'></p>"
                 tiedot += "<div class='centered'>";
-                tiedot += "<h3> Opintojakso</h3>";
+                tiedot += "<h3>Opintojakso</h3>";
                 tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>"
                     + "Tunnus: " + obj.opintojakso.tunnus + "<br>"
                     + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";

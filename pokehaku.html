@@ -101,24 +101,16 @@
                             document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                         })
                 }
-                //Tiedot: kuva, pituus, paino ja ääni
+                //Tiedot: pituus, paino ja erikoistaito
                 function pokeselin(obj) {
                     let pokeurl2 = obj.sprites.back_default;
                     let height = obj.height;
                     let weight = obj.weight;
-                    //GitHub Copilot: Kuinka saan toimivan soittimen .ogg-tiedostoille?
-                    //Ehdotti kovakoodattua URL-osoitetta, mutta se ei toimi
-                    //Käytetään PokeAPI:n ääntä
-                    let cry = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/${obj.id}.ogg`;
+                    let ability = obj.ability.name;
                     let kaanna = `<p><img src='${pokeurl2}' alt='pokekaantynyt'><br>`;
-                    kaanna += `Pituus: ${height}<br>"`;
-                    kaanna += `Paino: ${weight}<br>"`;
-                    //Soitin, jotta käyttäjä voi kuunnella Pokémonin karjauksen; sisältää virheviestin
-                    kaanna += `"Äännähtely:
-                        <audio controls>
-                        <source src="${cry}" type="audio/ogg">      
-                        Your browser does not support the audio element.
-                        </audio></p>`;
+                    kaanna += `Pituus: ${height}<br>`;
+                    kaanna += `Paino: ${weight}<br>`;
+                    kaanna += `Erikoistaito: ${ability}<br>`;
                     document.getElementById("selinkuva").innerHTML = kaanna;
                 };
             </script>

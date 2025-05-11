@@ -80,13 +80,16 @@
                 var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
 
                 document.getElementById("weatherIcon").src = iconUrl;
-                documentgetElementById("nimi").innerHTML = nimi;
+                document.getElementById("nimi").innerHTML = nimi;
                 document.getElementById("saatila").innerHTML = saatila;
                 document.getElementById("lampotila").innerHTML = lampotila + " °C";
-                document.getElementById("tuuli").innerHTML = tuuli + " m/s";   
-                document.getElementById("vastaus").innerHTML = teksti;
-        
+                document.getElementById("tuuli").innerHTML = tuuli + " m/s";   ;
             }
     </script>
-    </div>
+        <img id="weatherIcon" alt="Weather Icon">
+        <div id="nimi">Paikkakunta</div>
+        <div id="saatila">Sään tila</div>
+        <div id="lampotila">Lampotila</div>
+        <div id="tuuli">Tuulen nopeus</div>
 </main>
+</body>
