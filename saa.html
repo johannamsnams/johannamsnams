@@ -55,34 +55,10 @@
             </div>
         </div>
     </nav>
-    <main>
-    <!---JSON--->
+<main>
+    <script>
         <div id="vastaus"></div>
-        <script>
-            fetch('/johannamsnams/json/kurssi.json')
-                .then(function (response) {
-                    return response.json();
-                })
-
-                .then(function (responseJson) {
-                    kerro(responseJson);
-                })
-
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
-                })
-
-            function kerro(obj) {
-                let tiedot = "<h1>" + obj.opintojakso + "</h1>" + "<p>"
-                    + obj.oppilasmaara + "<p>"
-                    // Oppilaat vaakatasoon .join()-metodilla.
-                    + obj.oppilaat.join(" ") + "</p>"
-                    + obj.alku + " - " + obj.loppu + "</p>"
-                    + "<p>" + obj.kestovko + "</p>"
-                //Kuva lisätään "tiedot +=" -koodilla
-                tiedot += "<p><img src='" + obj.kuva + "' width=50% alt='meanwhile'></p>"; 
-                //Tulostetaan syöte
-                document.getElementById("vastaus").innerHTML = tiedot;
-
-            }
-        </script>
+        fetch('https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric')
+        
+    </script>
+</main>

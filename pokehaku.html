@@ -75,7 +75,7 @@
                     document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
                 })
             function poke() {
-                const PokeName = document.getElementById("pokemonName").value.toLowerCase();
+                const pokeName = document.getElementById("pokemonName").value.toLowerCase();
                 let name = document.getElementById("pokemonName").value;
             }
             function pokekuva(obj) {
@@ -85,19 +85,33 @@
                 document.getElementById("nimi").innerHTML = "<b>" + name + "</b>"
                 document.getElementById("pokemonName").value = "";
             }
-            function pokeselin(obj) {
-                let pokeurl2 = obj.sprites.back_default;
-                let cry = obj.cries.latest;
-                let height = obj.height;
-                let weight = obj.weight;
-
+            //Uusi funktio, kun käyttäjä painaa "käännä"
+            function kaannos() { 
+                const pokeName = document.getElementById("PokemonName").value.toLowerCase();
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (responseJson) {
+                    pokeselin(responseJson);
+                })
+                .catch(function (error) {
+                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
+                })
+                function pokeselin(obj){
+                    let pokeurl2 = obj.sprites.back_default;
+                    let cry = obj.cries.latest;
+                    let height = obj.height;
+                    let weight = obj.weight;
+                
                 document.getElementById("selinkuva").innerHTML = "<img src=" + pokeurl2 + ">";
                 document.getElementById("aani").innerHTML = cry;
                 document.getElementById("pituus").innerHTML = height;
                 document.getElementById("paino").innerHTML = weight;
-            }
+                };
+        }
         </script>
-        <button onclick="pokeselin()">Käännä</button><br>
+        <button onclick="kaannos()">Käännä</button><br>
         <p id="selinkuva"></p>
         <p id="aani"></p>
         <p id="pituus"></p>
