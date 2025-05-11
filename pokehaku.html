@@ -67,7 +67,7 @@
         <script>
             function poke() {
                 const pokeName = document.getElementById("PokemonName").value.toLowerCase();
-                fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
                 .then(function (response) {
                     return response.json();
                 })
@@ -91,7 +91,7 @@
 
             function kaannos() { 
                 const pokeName = document.getElementById("PokemonName").value.toLowerCase();
-                fetch('https://pokeapi.co/api/v2/pokemon/${pokeName}')
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
                 .then(function (response) {
                     return response.json();
                 })
