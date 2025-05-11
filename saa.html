@@ -10,7 +10,6 @@
     <title>Johannan JSON-sivut</title>
 </head>
 <style>
-
     .navbar-custom {
         background-color: #ffca4e;
     }
@@ -56,44 +55,48 @@
             </div>
         </div>
     </nav>
-<main>
-    <div class="container mt-5 my-2.5 bg-transparent">
-    <h1><b>Sää Helsingissä</b></h1>
-    <div id="vastaus"></div>
-    <script>
-        const aika = new Date();
-        const time =  aika.toLocaleTimeString('fi-FI', {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-        document.getElementById("vastaus").innerHTML = "<p>Sää kello " + time + "</p>";
-        fetch('https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric')
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (responseJson) {
-                    saa(responseJson);
-                })
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
-                })
-            function saa(data){
-                var teksti = "";
-                nimi = data.name;
-                saatila = data.weather[0].description;
-                lampotila = data.main.temp;
-                tuuli = data.wind.speed;
-                var iconCode = data.weather[0].icon;
-                var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
-                let tieto = `<b><h3>Sää:</h3><br><p>": ${saatila}</p><br>`;
-                tieto +=  `<h3>Lämpötila:</h3><br><p>": ${lampotila}</p><br>`;
-                tieto += `<h3>Tuuli:</h3><br><p>": ${tuuli}</p><br></b>`;
-                tieto += `<img src="${iconUrl}" alt="Weather Icon">`;
-                tieto += "</p>"
-                document.getElementById("nimi").innerHTML = tieto;
-            }
-    </script>
-</div>
-</div>
-</main>
+    <main>
+        <div class="container mt-5 my-2.5 bg-transparent">
+            <h1><b>Sää Helsingissä</b></h1>
+            <div id="nimi"></div>
+                <script>
+                    //Määritetään aikamuuttuja
+                    const aika = new Date();
+                    const time = aika.toLocaleTimeString('fi-FI', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    });
+                    //Tulostetaan nykyhetken kellonaika
+                    document.getElementById("vastaus").innerHTML = "<p>Sää kello " + time + "</p>";
+                    //Haetaan Helsingin säätiedot
+                    fetch('https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (responseJson) {
+                            saa(responseJson);
+                        })
+                        .catch(function (error) {
+                            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>"
+                        })
+                    //Luodaan funktio saa(); Osittain kopioitu PowerPointista
+                    function saa(data) {
+                        nimi = data.name;
+                        saatila = data.weather[0].description;
+                        lampotila = data.main.temp;
+                        tuuli = data.wind.speed;
+                        var iconCode = data.weather[0].icon;
+                        var iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+                        let tieto = `<b><h3>Sää:</h3><br><p>": ${saatila}</p><br>`; //Säätiedot
+                        tieto += `<h3>Lämpötila:</h3><br><p>": ${lampotila}</p><br>`; //Tämänhetkinen lämpötila
+                        tieto += `<h3>Tuuli:</h3><br><p>": ${tuuli}</p><br></b>`; //Tuulen nopeus
+                        tieto += `<img src="${iconUrl}" alt="Weather Icon">`; //Sääkuvake
+                        tieto += "</p>" //Suljetaan tiedot
+                        //Tulostetaan säätiedot
+                        document.getElementById("nimi").innerHTML = tieto;
+                    }
+                </script>
+            </div>
+        </div>
+    </main>
 </body>
