@@ -48,7 +48,11 @@
     .custom-link {
       color: #200fba;
     }
-
+    .fish-image{
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
     .footer-custom {
       background-color: rgb(226, 248, 241);
     }
@@ -92,11 +96,11 @@
     </div>
     <script>
       //Määritetään aikamuuttuja
-      var tanaan = new Date();
+      const tanaan = new Date();
       //Muutetaan päivämäärä Stringiksi
-      var dd = String(tanaan.getDate()).padStart(2, '0'); //Kaksinumeroiset luvut, alkaen 0:sta
-      var mm = String(tanaan.getMonth() + 1).padStart(2, '0'); //kaksinumeroiset luvut ja lasku alkaa 0:sta, joka on tammikuu
-      var yyyy = tanaan.getFullYear();
+      const dd = String(tanaan.getDate()).padStart(2, '0'); //Kaksinumeroiset luvut, alkaen 0:sta
+      const mm = String(tanaan.getMonth() + 1).padStart(2, '0'); //kaksinumeroiset luvut ja lasku alkaa 0:sta, joka on tammikuu
+      const yyyy = tanaan.getFullYear();
       //...muutettiin stringiksi, koska sitten sitä voidaan muuntaa...
       today = "Today's date: " + dd + "." + mm + "." + yyyy;
       document.getElementById("tanaan").innerHTML = today;
@@ -120,13 +124,15 @@
         const paivankala = obj[kalavalikko]; // Valitaan kalalista, josta ohjelma poimii päivän kalan
 
         // Kalatietojen haku
-        const fishTitle = paivankala.name;
-        const fishInfo = paivankala.description;
-        const fishImage = paivankala.image ? paivankala.image : "noimage.jpg";
-        const fishLatin = paivankala.latin_name;
-        // Kalatietojen esittely
-        let info = `<b><h2>${fishTitle}!</h2></b> <i>Yippee, that is a great one! Here is how it looks like: </i><br><br>`;
-        info += `<p><img src='${fishImage}' width="100%" height="100%" alt='kalakuva'><br><br>`;
+        const fishTitle = paivankala.name; // Kalalajin nimi
+        const fishInfo = paivankala.description; // Kalalajin kuvaus
+        const fishImage = paivankala.image || "noimage.jpg"; //jos kuvaa ei ole, käytetään oletuskuvaa
+        const fishLatin = paivankala.latin_name; // Latinankielinen nimi
+        // Kalatietojen esittely, jotta se voidaan tulostaa HTML:nä
+        let info = `<b><h2>${fishTitle}!</h2></b>
+        <i>Yippee, that is a great one! 
+        Here is how it looks like: </i><br><br>`;
+        info += `<p><img src='${fishImage}' class="fish-image" alt='kalakuva'><br><br>`;
         info += `<b>Latin Name:<i></b> ${fishLatin}</i><br><br>`;
         info += `<b>Description:</b><br> ${fishInfo}`;
         info += "</p>"; // Suljetaan tiedot
