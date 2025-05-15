@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Kala of the Day</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>     
+    body {
+      font-family: '', sans-serif;
+      background-color: #f0f8ff;
+      color: #000;
+    }
+    .header-custom {
+      background-color:#b4d0fa;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: fadeIn 2s ease-in-out;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      padding: 50px;
+    }
+    
+    .display-4 {
+      color: #fff;
+    }
+    .p-custom {
+      background-color: #dcf1ea;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .display-6{
+      font-size: 1.5rem;
+      color: #6b2323;
+      text-align: center;
+    }
+    .custom-link:hover{
+      color: #ff4d4d;
+      text-decoration: none;
+    }
+    .custom-link{
+      color: #200fba;
+    }
+    .footer-custom {
+      background-color: rgb(226, 248, 241);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="p-5 header-custom text-center">
+  <h1 class="display-4" ><b>Kala of the Day</b></h1>
+  <p class=text-white><b>Discover a new fish every day!</b></p>
+  </div>
+<main>
+<!---Ruudukko, bootstrap-->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>About me</h2>
+        <figure>
+          <img src="https://live.staticflickr.com/4041/4643709286_41fdb0f431_b.jpg" width="100%" alt="tiktaalik">
+        </figure>
+        <p><i>Puli puli, it is I, Tiktaalik!</i>
+          <br><br>
+          Here you can find information about different fish species - refreshed every day.<br><br>Read carefully as you might learn something interesting.<br><br>
+          <i>Fish.json</i> is from <a href="https://gist.github.com/tomdyson/de3b46612fdbbe6a449a4cd08a0041c0" class="custom-link">here</a>.<br>
+        </p>
+        <hr class="d-sm-none">
+      </div>
+      <div class="col-sm-8">
+        <div id="tanaan" class="display-6"></div>
+        <br>
+        <h5>Our Fish of the Day is...</h5>
+        <br>
+        <!--JSON-vastaus tulostuu tähän, olen luonut erillisen säiliön sille "p-custom"-->
+        <div id="vastaus" class="p-custom"></div>
+        <br><i>What a wonderful creature it is, indeed!<br><br> Come back again tomorrow for more fishy facts!</i>
+      </p>
+    </div>
+  </div>
+  </div>
+    <script>
+      //Määritetään aikamuuttuja
+      var tanaan = new Date();
+      //Muutetaan päivämäärä Stringiksi
+      var dd = String(tanaan.getDate()).padStart(2, '0'); //Kaksinumeroiset luvut, alkaen 0:sta
+      var mm = String(tanaan.getMonth() + 1).padStart(2, '0'); //kaksinumeroiset luvut ja lasku alkaa 0:sta, joka on tammikuu
+      var yyyy = tanaan.getFullYear();
+      //...muutettiin stringiksi, koska sitten sitä voidaan muuntaa...
+      today = 'Today is: ' + dd + '.' + mm + '.' + yyyy;
+      document.getElementById("tanaan").innerHTML = today;
+      //Määritetään fish.json; haetaan osoite:
+      fetch('https://gist.githubusercontent.com/tomdyson/de3b46612fdbbe6a449a4cd08a0041c0/raw/a8bbb8a2d45f320ee1116aec68a20634c29066ba/fish.json')
+        .then(function (response) {
+          return response.json();
+        })
+
+        .then(function (responseJson) {
+          vonkale(responseJson); //Tuleva funktio on nimeltään vonkale(), johon määritetään oliot
+        })
+
+        .catch(function (error) {
+          document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
+        })
+      function vonkale(obj) {
+        const aika = new Date(); // Määritetään uusi aikamuuttuja, jotta kaloja saataisiin esille joka päivä
+        const tamapaiva = Math.floor((tanaan-new Date(tanaan.getFullYear(), 0, 0))/1000/60/60/24); //Koko vuosi lasketaan sekunteina, ja jaetaan 60/60/24, jotta saadaan päivät.
+        const kalavalikko = tamapaiva % obj.length; // Kalavalikko: Vuosi jaetaan kalalistan pituudella, jotta saataisiin jokaiselle päivälle (24h välein) oma kala
+        const paivankala = obj[kalavalikko]; // Valitaan kalalista, josta ohjelma poimii päivän kalan
+        
+        // Kalatietojen haku
+        const fishTitle = paivankala.name;
+        const fishInfo = paivankala.description;
+        const fishImage = paivankala.image ? paivankala.image : "noimage.jpg";
+        const fishLatin = paivankala.latin_name;
+        // Kalatietojen esittely
+        let info = `<b><h2>${fishTitle}!</h2></b> <i>Yippee, that is a great one!</i><br>`;
+        info += `<p><img src='${fishImage}' alt='kalakuva'><br>`;
+        info += `<b>Latin Name:<i></b> ${fishLatin}</i><br><br>`;
+        info += `<b>Description:</b><br> ${fishInfo}`;
+        info += "</p>"; // Suljetaan tiedot
+        document.getElementById("vastaus").innerHTML = info; // Tulostetaan kalatiedot
+
+      }
+    </script>
+    <div class="mt-5 p-4 footer-custom text-black text-center">
+      <p>Nothing fishy down here, sorry!</p>
+    </div>
+  </main>
+</body>
+
+</html>
