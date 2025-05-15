@@ -12,13 +12,6 @@
       background-color: #ffffff;
       color: #332652;
     }
-
-    .header-custom {
-      background-size: cover;
-      background-position: center;
-      padding: 50px;
-    }
-
     .lead {
       font-size: 1.5rem;
       color: #736988;
@@ -27,13 +20,6 @@
     .display-4 {
       color: #15224b;
     }
-
-    .p-custom {
-      background-color: #dcf1ea;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
     .custom-display {
       font-size: 1.5rem;
       color: #3f224d;
@@ -85,14 +71,18 @@
         <div class="col-sm-8">
           <div id="tanaan" class="custom-display"></div>
           <br>
-          <h3>Our Fish of the Day is...</h3> <i>...drumroll, please...<br></i>
+          <h3>Our Fish of the Day is...</h3>
+          <button id="nappi" onclick="haekala()" class="btn btn-primary">Get Today's Fish</button>
           <br>
-          <!--JSON-vastaus tulostuu tähän, olen luonut erillisen säiliön sille "p-custom"-->
-          <div id="vastaus" class="p-custom"></div>
+          <!--JSON-vastaus tulostuu tähän,-->
+          <div id="vastaus"></div>
           <br><i>What a wonderful fish it is, indeed!<br><br> Come back again tomorrow for more fine fish!</i>
           </p>
         </div>
       </div>
+    </div>
+    <div class="mt-5 p-4 footer-custom text-center">
+      <p>Nothing fishy down here, sorry!</p>
     </div>
     <script>
       //Määritetään aikamuuttuja
@@ -105,44 +95,42 @@
       today = "Today's date: " + dd + "." + mm + "." + yyyy;
       document.getElementById("tanaan").innerHTML = today;
       //Määritetään fish.json; haetaan osoite:
-      fetch('https://gist.githubusercontent.com/tomdyson/de3b46612fdbbe6a449a4cd08a0041c0/raw/a8bbb8a2d45f320ee1116aec68a20634c29066ba/fish.json')
-        .then(function (response) {
-          return response.json();
-        })
+      function haekala(){
+        fetch('https://gist.githubusercontent.com/tomdyson/de3b46612fdbbe6a449a4cd08a0041c0/raw/a8bbb8a2d45f320ee1116aec68a20634c29066ba/fish.json')
+          .then(function (response) {
+            return response.json();
+          })
 
-        .then(function (responseJson) {
-          vonkale(responseJson); //Tuleva funktio on nimeltään vonkale(), johon määritetään oliot
-        })
+          .then(function (responseJson) {
+            vonkale(responseJson);
+            document.getElementById("nappi").style.display = "none" // Piilottaa napin
+          })
 
-        .catch(function (error) {
-          document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
-        })
+          .catch(function (error) {
+            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei löytynyt</p>"
+          })
+      }
       function vonkale(obj) {
         const aika = new Date(); // Määritetään uusi aikamuuttuja, jotta kaloja saataisiin esille joka päivä
         const tamapaiva = Math.floor((tanaan - new Date(tanaan.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24); //Koko vuosi lasketaan sekunteina, ja jaetaan 60/60/24, jotta saadaan päivät.
         const kalavalikko = tamapaiva % obj.length; // Kalavalikko: Vuosi jaetaan kalalistan pituudella, jotta saataisiin jokaiselle päivälle (24h välein) oma kala
         const paivankala = obj[kalavalikko]; // Valitaan kalalista, josta ohjelma poimii päivän kalan
-
-        // Kalatietojen haku
-        const fishTitle = paivankala.name; // Kalalajin nimi
-        const fishInfo = paivankala.description; // Kalalajin kuvaus
-        const fishImage = paivankala.image || "noimage.jpg"; //jos kuvaa ei ole, käytetään oletuskuvaa
-        const fishLatin = paivankala.latin_name; // Latinankielinen nimi
-        // Kalatietojen esittely, jotta se voidaan tulostaa HTML:nä
-        let info = `<b><h2>${fishTitle}!</h2></b>
-        <i>Yippee, that is a great one! 
-        Here is how it looks like: </i><br><br>`;
-        info += `<p><img src='${fishImage}' class="fish-image" alt='kalakuva'><br><br>`;
-        info += `<b>Latin Name:<i></b> ${fishLatin}</i><br><br>`;
-        info += `<b>Description:</b><br> ${fishInfo}`;
-        info += "</p>"; // Suljetaan tiedot
+        const fishImage = paivankala.image || "noimage.jpg"; // Kalatiedot, kuva tai ei kuvaa
+        // Kalatietojen haku, muutetaan korteiksi
+        const info =`
+        <div class="card">
+          <img src="${fishImage}" class="card-img-top fish-image" alt="kalakuva">
+          <div class="card-body">
+            <h5 class="card-title">${paivankala.name}</h5>
+            <p class="card-text"><b>Latin Name:</b> ${paivankala.latin_name}</p>
+            <p class="card-text"><b>Description:</b> ${paivankala.description}</p>
+          </div>
+        </div>`;
         document.getElementById("vastaus").innerHTML = info; // Tulostetaan kalatiedot
 
       }
     </script>
-    <div class="mt-5 p-4 footer-custom text-center">
-      <p>Nothing fishy down here, sorry!</p>
-    </div>
+
   </main>
 </body>
 
