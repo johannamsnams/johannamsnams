@@ -115,10 +115,14 @@
         const kalavalikko = tamapaiva % obj.length; // Kalavalikko: Vuosi jaetaan kalalistan pituudella, jotta saataisiin jokaiselle päivälle (24h välein) oma kala
         const paivankala = obj[kalavalikko]; // Valitaan kalalista, josta ohjelma poimii päivän kalan
         const fishImage = paivankala.image || "noimage.jpg"; // Kalatiedot, kuva tai ei kuvaa
-        // Kalatietojen haku, muutetaan korteiksi
+        // Kalatietojen haku, muutetaan korteiksi 
+        // 18.5.2025 Lisätty onerror ominaisuus. 
+        // Jos kuvaa ei löydy, se ei kaada koko ohjelmaa
+        // vaan näyttää "noimage.jpg" -kuvan
         const info =`
         <div class="card">
-          <img src="${fishImage}" class="card-img-top fish-image" alt="kalakuva">
+          <img src="${fishImage}" class="card-img-top fish-image" alt="kalakuva"
+            onerror="this.onerror=null;this.src='noimage.jpg';"> 
           <div class="card-body">
             <h5 class="card-title">${paivankala.name}</h5>
             <p class="card-text"><b>Latin Name:</b> ${paivankala.latin_name}</p>
